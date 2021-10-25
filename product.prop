@@ -8,7 +8,7 @@ ro.com.google.ime.kb_pad_port_b=1
 
 # Graphics
 debug.sdm.support_writeback=0
-
+debug.sf.enable_gl_backpressure=1
 # IORAP
 iorapd.readahead.enable=true
 ro.iorapd.enable=true
