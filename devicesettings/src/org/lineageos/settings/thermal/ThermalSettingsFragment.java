@@ -39,7 +39,7 @@ import androidx.preference.PreferenceFragment;
 
 import com.android.settingslib.applications.ApplicationsState;
 
-import org.lineageos.settings.R;
+import org.lineageos.settings.device.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

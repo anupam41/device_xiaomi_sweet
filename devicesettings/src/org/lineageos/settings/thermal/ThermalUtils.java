@@ -23,7 +23,7 @@ import android.os.UserHandle;
 
 import androidx.preference.PreferenceManager;
 
-import org.lineageos.settings.utils.FileUtils;
+import org.lineageos.settings.device.utils.FileUtils;
 
 public final class ThermalUtils {
 
