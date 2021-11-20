@@ -28,6 +28,7 @@ import androidx.preference.SwitchPreference;
 
 import org.lineageos.settings.device.Constants;
 import org.lineageos.settings.device.R;
+import org.lineageos.settings.device.display.KcalSettingsActivity;
 import org.lineageos.settings.device.speaker.ClearSpeakerActivity;
 
 public class MainSettingsFragment extends PreferenceFragment {
@@ -36,6 +37,7 @@ public class MainSettingsFragment extends PreferenceFragment {
     private ListPreference mPrefRefreshRateConfig;
     private static final String PREF_CLEAR_SPEAKER = "clear_speaker_settings";
     
+    private Preference mKcalSettingsPref;
     private Preference mClearSpeakerPref;
 
     @Override
@@ -97,6 +99,13 @@ public class MainSettingsFragment extends PreferenceFragment {
         	Intent intent = new Intent(getActivity().getApplicationContext(), ClearSpeakerActivity.class);
         	startActivity(intent);
         	return true;
-        });	
+        });
+        
+        mKcalSettingsPref = (Preference) findPreference(PREF_KCAL_SETTINGS);
+        mKcalSettingsPref.setOnPreferenceClickListener(preference -> {
+            Intent intent = new Intent(getActivity().getApplicationContext(), KcalSettingsActivity.class);
+            startActivity(intent);
+            return true;
+        });    
     }
 }
