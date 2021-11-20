@@ -22,23 +22,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.SharedPreferences;
-import android.os.Handler;
-
-import androidx.preference.PreferenceManager;
-
-import org.lineageos.settings.device.Constants;
-import org.lineageos.settings.device.dirac.DiracUtils;
-import org.lineageos.settings.device.utils.DisplayUtils;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        DisplayUtils.setDcDimmingStatus(sharedPreferences.getBoolean(Constants.KEY_DC_DIMMING, false));
         DisplayUtils.updateRefreshRateSettings(context);
         DiracUtils.initialize(context);
+        
     }
+
 }
