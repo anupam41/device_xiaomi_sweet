@@ -19,3 +19,8 @@ persist.device_config.runtime_native_boot.iorap_readahead_enable=true
 
 # App
 ro.launcher.blur.appLaunch=0
+
+# Render Engine
+debug.hwui.renderer=skiagl
+debug.renderengine.backend=skiaglthreaded
+renderthread.skia.reduceopstasksplitting=true
