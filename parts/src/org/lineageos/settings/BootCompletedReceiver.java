@@ -18,6 +18,9 @@
 package org.lineageos.settings;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.pm.PackageManager;
+import android.os.Handler;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +28,8 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
+import org.lineageos.settings.Constants;
+import org.lineageos.settings.utils.DisplayUtils;
 import org.lineageos.settings.dirac.DiracUtils;
 import org.lineageos.settings.display.KcalUtils;
 
@@ -42,6 +47,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         if (KcalUtils.isKcalSupported())
             KcalUtils.writeCurrentSettings(sharedPrefs);
             
-        DiracUtils.initialize(context);    
+        DiracUtils.initialize(context);   
+        DisplayUtils.updateRefreshRateSettings(context);
     }
 }

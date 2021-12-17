@@ -18,13 +18,17 @@ package org.lineageos.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.os.Handler;
+import android.provider.Settings;
+import android.widget.TextView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.SwitchPreference;
 import androidx.preference.ListPreference;
 
+import org.lineageos.settings.Constants;
 import org.lineageos.settings.R;
+import org.lineageos.settings.utils.DisplayUtils;
 import org.lineageos.settings.dirac.DiracUtils;
 import org.lineageos.settings.display.KcalSettingsActivity;
 import org.lineageos.settings.display.LcdFeaturesPreferenceActivity;
@@ -39,12 +43,14 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
     private static final String PREF_CLEAR_SPEAKER = "clear_speaker_settings";
     private static final String PREF_KCAL_SETTINGS = "kcal_settings";
     private static final String PREF_LCD_FEATURES = "lcd_features_settings";
-
+    
     private SwitchPreference mDiracPref;
 
     private ListPreference mHeadsetPref;
     private ListPreference mPresetPref;
 
+    private Preference mPrefRefreshRateInfo;
+    private ListPreference mPrefRefreshRateConfig;
     private Preference mKcalSettingsPref;
     private Preference mLcdFeaturesPref;
     private Preference mClearSpeakerPref;
@@ -93,6 +99,61 @@ public class DeviceSettingsFragment extends PreferenceFragment implements
         });
         
     }
+    
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+    	super.onActivityCreated(savedInstanceState);
+    	getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    	addPreferencesFromResource(R.xml.main_settings);
+    	mPrefRefreshRateConfig = (ListPreference) findPreference(Constants.KEY_REFRESH_RATE_CONFIG);
+    	mPrefRefreshRateConfig.setOnPreferenceChangeListener(PrefListener);
+    	mPrefRefreshRateInfo = (Preference) findPreference(Constants.KEY_REFRESH_RATE_INFO);
+    	updateSummary();
+    }
+    
+    private Preference.OnPreferenceChangeListener PrefListener =
+        new Preference.OnPreferenceChangeListener() {
+        	@Override
+        	public boolean onPreferenceChange(Preference preference, Object value) {
+        		final String key = preference.getKey();
+        		
+        		if (Constants.KEY_REFRESH_RATE_CONFIG.equals(key)) {
+        			setHzConfig();
+        		}
+        		
+        		return true;
+        	}
+       };
+       
+    private float getCurrentMinHz() {
+    	return Settings.System.getFloat(getContext().getContentResolver(),
+    	Settings.System.MIN_REFRESH_RATE, Constants.DEFAULT_REFRESH_RATE);
+    }
+    
+    private float getCurrentMaxHz() {
+    	return Settings.System.getFloat(getContext().getContentResolver(),
+    	Settings.System.PEAK_REFRESH_RATE, Constants.DEFAULT_REFRESH_RATE);
+    }
+    
+    private void setHzConfig() {
+    	DisplayUtils.updateRefreshRateSettings(getContext());
+    	updateSummary();
+    }
+    
+    private void updateSummary() {
+    	if (mPrefRefreshRateConfig.getEntry() == null) {
+    		mPrefRefreshRateConfig.setValueIndex(2);
+    	}
+    	Handler.getMain().post(() -> {
+    		mPrefRefreshRateInfo.setSummary(
+    		String.format(getString(R.string.current_refresh_rate_info),
+    		    String.valueOf(Math.round(getCurrentMaxHz())), String.valueOf(Math.round(getCurrentMinHz()))));
+    	});
+    }	
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
