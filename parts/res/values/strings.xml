@@ -18,14 +18,14 @@
     <!-- Xiaomi Parts -->
     <string name="device_settings_title">Xiaomi Parts</string>
     <string name="device_settings_summary">Extra Settings</string>
-    <string name="audio_title">Audio</string>
+    <string name="sound_title">Sound</string>
     <string name="display_title">Display</string>
 
     <!-- Dirac settings -->
-    <string name="dirac_title">Mi Sound Enhancer</string>
-    <string name="dirac_summary">Optimize audio quality</string>
-    <string name="dirac_headset_title">Choose headphones type</string>
-    <string name="dirac_preset_title">Choose a preset</string>
+    <string name="dirac_title">Dirac Sound Enhancer</string>
+    <string name="dirac_summary">Configure sound presets, headset types and more</string>
+    <string name="dirac_headset_title">Headset type</string>
+    <string name="dirac_preset_title">Sound preset</string>
 
     <!-- Dirac settings: Headset types -->
     <string name="dirac_headset_default">Default</string>
@@ -64,9 +64,11 @@
     <string name="dirac_preset_dance">Dance</string>
     <string name="dirac_preset_metal">Metal</string>
     <string name="dirac_preset_bass_booster">Bass Booster</string>
-
-     <!-- QS tile title -->
-    <string name="dirac_qs_tile_title">Mi Sound Enhancer</string>
+    
+    <!-- Dirac settings: Hifi -->
+    <string name="dirac_hifi_enable_title"> Enable Hi-fi</string>
+    <string name="dirac_hifi_title">Hi-Fi</string>
+    <string name="dirac_hifi_summary">Decrease noise and Distortion and increase audio quality</string>
 
     <!-- Clear Speaker -->
     <string name="clear_speaker_title">Clear speaker</string>

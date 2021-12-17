@@ -39,9 +39,9 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         if (DEBUG)
             Log.d(TAG, "Received boot completed intent");
 
-        new DiracUtils(context).onBootCompleted();
-
         if (KcalUtils.isKcalSupported())
             KcalUtils.writeCurrentSettings(sharedPrefs);
+            
+        DiracUtils.initialize(context);    
     }
 }
