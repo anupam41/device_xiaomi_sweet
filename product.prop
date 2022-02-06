@@ -27,3 +27,6 @@ ro.launcher.blur.appLaunch=0
 debug.hwui.renderer=skiavk
 graphics.gpu.profiler.support=true
 renderthread.skia.reduceopstasksplitting=true
+
+# APEX
+ro.apex.updatable=false
