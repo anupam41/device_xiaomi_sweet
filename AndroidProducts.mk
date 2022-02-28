@@ -1,7 +1,7 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/nad_sweet.mk
+    $(LOCAL_DIR)/syberia_sweet.mk
 
 COMMON_LUNCH_CHOICES := \
-    nad_sweet-eng \
-    nad_sweet-userdebug \
-    nad_sweet-user
+    syberia_sweet-eng \
+    syberia_sweet-userdebug \
+    syberia_sweet-user
